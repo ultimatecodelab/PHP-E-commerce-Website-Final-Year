@@ -72,6 +72,19 @@ include("functions/functions.php");
 							<ul class="nav navbar-nav">
 								
 								<li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<?php
+
+								if(!isset($_SESSION['customer_email']))
+								{
+									//echo "<a href='checkout.php'> Login</a>";
+									echo "<li><a href='checkout.php'><i class='fa fa-lock'></i> Login</a></li>";
+								}
+								else
+								{
+									
+									echo "<li><a href='logout.php'><i class='fa fa-lock'></i> Logout</a></li>";
+								}
+								?>
 								
 								
 							</ul>
@@ -83,6 +96,12 @@ include("functions/functions.php");
 								<b>Welcome Guest!></b>
 								<b style=" color: #fdb45e;">Shopping Cart:</b>
 								<span>-Total Items: <?php itemsFromCart(); ?> - Total Price: £<?php getTotalPrice(); ?></span>	
+								
+
+								?>
+								
+
+
 				</div>
 			</div>
 		</div><!--/header-middle-->

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include("includes/db.php");
 include("functions/functions.php");
@@ -71,7 +72,19 @@ include("functions/functions.php");
 							<ul class="nav navbar-nav">
 								
 								<li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="customer/customer_login.php"><i class="fa fa-lock"></i> Login</a></li>
+								<?php
+
+								if(!isset($_SESSION['customer_email']))
+								{
+									//echo "<a href='checkout.php'> Login</a>";
+									echo "<li><a href='customer\customer_login.php'><i class='fa fa-lock'></i> Login</a></li>";
+								}
+								else
+								{
+									
+									echo "<li><a href='logout.php'><i class='fa fa-lock'></i> Logout</a></li>";
+								}
+								?>
 								
 							</ul>
 						</div>
