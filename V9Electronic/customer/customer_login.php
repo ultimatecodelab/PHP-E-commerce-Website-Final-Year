@@ -6,6 +6,11 @@
 </head>
 
 <body>
+
+<?php
+	@session_start(); //no error if it not initilise
+	include("includes/db.php");
+?>
 	<div>
 
 	
@@ -33,6 +38,32 @@
 	 <h4 align="center"><a href="customer_register.php">New Customer Register Here</a></h4>
 
 </div>
+<?php
+//fires out  when user click login
+
+if(isset($_POST['customer_login']))
+{
+	//checking if the user/customer login credentials exist in the database.
+	$customer_email = $_POST['customer_email'];
+	$customer_pass = $_POST['customer_pass'];
+	
+	$select_customer = "SELECT * FROM customers where customer_email='$customer_email' AND customer_pass='$customer_pass'";
+	$run_customer = mysqli_query($con,$select_customer);
+
+	if(mysqli_num_rows($run_customer)>0)
+	{
+		
+
+		$_SESSION['customer_email']=$customer_email;
+		
+		echo "<script>window.open('index.php','_self')</script>";
+	}
+	else
+	{
+		echo "<script> alert('Incorrect Email/Password')</script>";
+	}
+}
+?>
 </body>
 </html>
 

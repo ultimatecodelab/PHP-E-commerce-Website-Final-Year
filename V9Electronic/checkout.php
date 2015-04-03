@@ -231,7 +231,7 @@ include("functions/functions.php");
 					//echo $ip;
 				?>
 					<div class="features_items"  id="products_box"><!--features_items start-->
-						<h2 class="title text-center">Login / Register</h2>
+						<h2 class="title text-center"></h2>
 							
 							<?php 
 								 if(!isset($_SESSION['customer_email']))
