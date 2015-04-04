@@ -226,26 +226,42 @@ include("functions/functions.php");
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
-						<h2>Categories</h2>
+						<h2>My Account</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-products start-->
 							<div class="category-tab ul li ">
 								<ul class="nav nav-pills nav-stacked" id="categories">
-									<?php getCategories(); ?>
+									<?php
+									 if(isset($_SESSION['customer_email']))
+									 {
+									 	$user_session=$_SESSION['customer_email'];
+									 	$get_customer_pic = "select * from customers where customer_email='$user_session'";
+									 	$run_customer=mysqli_query($con,$get_customer_pic);
+									 	$row_customer = mysqli_fetch_array($run_customer);
+									 	$customer_pic=$row_customer['customer_image'];
+
+									 	echo "<img src='customer_photos/$customer_pic' width='255' height='180'>";
+
+									 }	
+
+
+									?>
+									<li> <a href="my_account.php?my_orders">My Orders </a></li>
+									<li> <a href="my_account.php?edit_account">Edit Account </a></li>
+									<li> <a href="my_account.php?change_pass">Change Password </a></li>
+									<li> <a href="my_account.php?delete_account">Delete Account </a></li>
+									<li> <a href="logout.php">Logout </a></li>
+									<br>
+									<br>
+									<br>
+									<br><br>
+									<br><br>
+									<br><br>
+									<br>
 								</ul>
 							</div>
 							
 						</div><!--/category-products ends-->
 					
-						<div class="brands_products"><!--brands_products start-->
-							<h2>Brands</h2>
-							<div class="category-tab ul li ">
-								<ul class="nav nav-pills nav-stacked" id="brands">
-									<?php getBrands(); 
-						
-						?>
-								</ul>
-							</div>
-						</div><!--/brands_products Ends-->
 						
 						
 						
@@ -262,12 +278,12 @@ include("functions/functions.php");
 					//echo $ip;
 				?>
 					<div class="features_items"  id="products_box"><!--features_items start-->
-						<h2 class="title text-center">Features Items</h2>
+						<h2 class="title text-center">Your Account Information</h2>
 							
 							<?php 
-								  getPro(); 
-								  getCatPro();
-								  getBrandPro();					 
+								 // getPro(); 
+								  //getCatPro();
+								  //getBrandPro();					 
 								  
 							?>
 							

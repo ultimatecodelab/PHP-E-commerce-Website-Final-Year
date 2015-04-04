@@ -2,6 +2,7 @@
 session_start();
 include("includes/db.php");
 include("functions/functions.php");
+
 ?>
 
 
@@ -13,7 +14,7 @@ include("functions/functions.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Home | V9-Electronics</title>
+    <title>Checkout | V9-Electronics</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -71,8 +72,6 @@ include("functions/functions.php");
 							<ul class="nav navbar-nav">
 								
 								<li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-
-
 								<?php
 
 								if(!isset($_SESSION['customer_email']))
@@ -87,32 +86,21 @@ include("functions/functions.php");
 								}
 								?>
 								
+								
 							</ul>
 						</div>
 					</div>
 								<?php
 									cart();
 								?>
-								<?php
-
-								if(!isset($_SESSION['customer_email']))
-								{
-		
-									echo "<b> Welcome Guest! </b>";
-									
-								}
-								else
-								{
-									$userName = $_SESSION['customer_email'];
-									echo "<b style='color: #fdb45e;'> Welcome:&nbsp;$userName! &nbsp;&nbsp;&nbsp;</b>";
-									
-								}
-								?>
-
-								
+								<b>Welcome Guest!></b>
 								<b style=" color: #fdb45e;">Shopping Cart:</b>
-								<span>-Total Items: <?php itemsFromCart(); ?> - Total Price: £<?php getTotalPrice(); ?></span>
+								<span>-Total Items: <?php itemsFromCart(); ?> - Total Price: £<?php getTotalPrice(); ?></span>	
 								
+
+								?>
+								
+
 
 				</div>
 			</div>
@@ -134,10 +122,10 @@ include("functions/functions.php");
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="index.php" class="active">Home</a></li>
 								<li><a href="all_products.php">All Products</a></li>
-								<li><a href="customer/my_account.php">My Account</a></li>
-								<li><a href="cart.php">Shopping Cart</a></li>
+								<li><a href="Accounts.php">My Account</a></li>
+								<li><a href="ShoppingCart.php">Shopping Cart</a></li>
 								<li><a href="Contact.php">Contact Us</a></li>
-								<li><a href="admin_area/index.php">Admin Login</a></li>
+								<li><a href="admin_area/insert_products.php">Admin Login</a></li>
 							</ul>
 						</div>
 					</div>
@@ -214,6 +202,7 @@ include("functions/functions.php");
 						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
 							<i class="fa fa-angle-right"></i>
 						</a>
+
 					</div>
 					
 				</div>
@@ -222,6 +211,7 @@ include("functions/functions.php");
 	</section><!--/slider-->
 	
 	<section>
+
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
@@ -257,20 +247,72 @@ include("functions/functions.php");
 				</div>
 				
 				<div class="col-sm-9 padding-right">
-				<?php
-					//$ip = getRealIpAddress();
-					//echo $ip;
-				?>
-					<div class="features_items"  id="products_box"><!--features_items start-->
-						<h2 class="title text-center">Features Items</h2>
+
+				<form action="customer_register.php" method="post" enctype="multipart/form-data"/>
+
+				<table  width ="750" align="center">
+
+						<tr>
+							<td> <h2> Create an Account </h2> </td>
+						</tr>
+
+						<tr>
+							<td align="right"><b>Customer Name: </b> </td>
+							<td> <input type="text" name="customer_name" required />  </td>
+						</tr>
 							
-							<?php 
-								  getPro(); 
-								  getCatPro();
-								  getBrandPro();					 
-								  
-							?>
-							
+						<tr>
+							<td align="right"><b>Customer Email: </b> </td>
+							<td> <input type="text" name="customer_email" required />  </td>
+						</tr>
+
+						<tr>
+							<td align="right"><b>Customer Password: </b> </td>
+							<td> <input type="text" name="customer_pass" required />  </td>
+						</tr>
+
+						<tr>
+							<td align="right"><b>Customer Country: </b> </td>
+							<td> 
+
+							 <select name="customer_country">
+							 	<option> Select a Country</option>
+							 	<option> Ireland </option>
+							 	<option> United Kingdom </option>
+							 	<option> United States </option>
+							 	<option> China </option>
+							 	<option> India </option>
+							 	<option> France </option>
+							 </select>
+
+							</td>
+						</tr>
+
+						<tr>
+							<td align="right"><b>Customer city: </b> </td>
+							<td> <input type="text" name="customer_city" required />  </td>
+						</tr>
+
+						<tr>
+							<td align="right"><b>Customer Mobile no: </b> </td>
+							<td> <input type="text" name="customer_contact" required />  </td>
+						</tr>
+
+						<tr>
+							<td align="right"><b>Customer Address: </b> </td>
+							<td> <input type="text" name="customer_address" required />  </td>
+						</tr>
+
+						<tr>
+							<td align="right"><b>Customer Image: </b> </td>
+							<td> <input type="file" name="customer_image" required />  </td>
+						</tr>
+
+						<tr align="center"> 
+							<td colspan="10"> <input type="submit" name="register" value="Submit" /> </td>
+						</tr>
+					</form>
+
 						
 					</div><!--features_items Ends-->
 					
@@ -284,99 +326,6 @@ include("functions/functions.php");
 		</div>
 	</section>
 	
-	<footer id="footer"><!--Footer-->
-		<div class="footer-top">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="companyinfo">
-							<h3><span>V9</span>-Electronics</h3>
-							<p>We provide the very best of consumer electronics all around the globe.</p>
-						</div>
-					</div>
-					<div class="col-sm-7">
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe1.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Cliffs Of Moher</p>
-								<h2>24 April 2015</h2>
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe2.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>St Patrick's Day</p>
-								<h2>17 March 2015</h2>
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe3.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Map Of Ireland</p>
-								<h2>24 DEC 2015</h2>
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe4.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>GMIT Galway Campus</p>
-								<h2>24 May 2015</h2>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="address">
-							<img src="images/home/map.png" alt="" />
-							<p>V9 Electronics, A Product of GMIT - Galway Campus, Ireland</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		
-		
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<p class="pull-left">Copyright © 2015 V9-Electronics Inc. All rights reserved.</p>
-					<p class="pull-right">Designed by <span><a target="_blank">James-Arjun</a></span></p>
-				</div>
-			</div>
-		</div>
-		
-	</footer><!--/Footer-->
 	
 
   
@@ -388,3 +337,53 @@ include("functions/functions.php");
     <script src="js/main.js"></script>
 </body>
 </html>
+
+<?php
+
+	if(isset($_POST['register']))
+	{
+		$customer_name = $_POST['customer_name'];
+		$customer_email = $_POST['customer_email'];
+		$customer_pass = $_POST['customer_pass'];
+		$customer_country = $_POST['customer_country'];
+		$customer_city = $_POST['customer_city'];
+		$customer_contact = $_POST['customer_contact'];
+		$customer_address= $_POST['customer_address'];
+
+		$customer_image = $_FILES['customer_image']['name'];
+
+		$customer_image_temp = $_FILES['customer_image']['tmp_name'];
+
+		$customer_ip = getRealIpAddress();
+
+		$insert_customer = "insert into customers(customer_name,customer_email,customer_pass,customer_country,customer_city,customer_contact,customer_address,customer_image,customer_ip) 
+		values ('$customer_name','$customer_email','$customer_pass','$customer_country','$customer_city','$customer_contact','$customer_address','$customer_image','$customer_ip')";
+
+		$run_customer = mysqli_query($con,$insert_customer);
+		//uploading a customer photo
+		move_uploaded_file($customer_image_temp, "customer/customer_photos/$customer_image");
+
+		//checking if this user have anything in the car/ if yes we will redirect to payement page
+		$sel_cart = "select * from cart where ip_add='$customer_ip'";
+
+		$run_cart = mysqli_query($con,$sel_cart);
+		$check_cart = mysqli_num_rows($run_cart);
+
+		if($check_cart>0)
+		{
+			//create a session
+			$_SESSION['customer_email'] = $customer_email;
+			echo "<script>alert('Account has been created') </script>";
+			echo "<script>window.open('checkout.php','_self')</script>";
+		}
+		else
+		{
+			$_SESSION['customer_email'] = $customer_email;
+			echo "<script>alert('Account has been created') </script>";
+			echo "<script>window.open('index.php','_self')</script>";
+
+		}
+	}
+
+
+?>

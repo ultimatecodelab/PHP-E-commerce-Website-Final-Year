@@ -92,7 +92,23 @@ include("functions/functions.php");
 								<?php
 									cart();
 								?>
-								<b>Welcome Guest!></b>
+
+								<?php
+
+								if(!isset($_SESSION['customer_email']))
+								{
+		
+									echo "<b> Welcome Guest! </b>";
+									
+								}
+								else
+								{
+									$userName = $_SESSION['customer_email'];
+									echo "<b style='color: #fdb45e;'> Welcome:&nbsp;$userName! &nbsp;&nbsp;&nbsp;</b>";
+									
+								}
+								?>
+
 								<b style=" color: #fdb45e;">Shopping Cart:</b>
 								<span>-Total Items: <?php itemsFromCart(); ?> - Total Price: £<?php getTotalPrice(); ?></span>	
 				</div>
