@@ -21,7 +21,65 @@ function getRealIpAddress()
 	
 	return $ip;
 }
+function getDefault()
+{
+	global $db;
+	
+	$c= $_SESSION['customer_email'];
+	$get_c = "select * from customers where customer_email='$c'";
 
+
+
+	$run_c=mysqli_query($db,$get_c);
+	$row_c = mysqli_fetch_array($run_c);
+	$customer_id=$row_c['customer_id'];
+
+	if(!isset($_GET['my_orders'])){
+		if(!isset($_GET['edit_account'])){
+			if(!isset($_GET['change_pass'])){
+				if(!isset($_GET['delete_account'])){
+	
+	$get_orders= "select * from customer_orders where customer_id='$customer_id' AND order_status='pending'";
+	$run_orders=mysqli_query($db,$get_orders);
+	$count_orders = mysqli_num_rows($run_orders);
+
+	if($count_orders>0)
+	{
+		echo "
+		<div style='padding:10px'>
+		<h1 style='color:red;'> Important!!</h1>
+
+		<h2> You Have $count_orders pending orders.</h3>
+		<h3> Please see your orders details by clicking this <a href='my_account.php?my_orders'> LINK </a>
+		<br> Or you can <a href='pay_offline.php'> Pay offline </a> </h3>
+
+
+		</div>
+		";
+
+	}
+	else
+	{
+		echo "
+		<div style='padding:10px'>
+		<h1 style='color:red;'> Important!!</h1>
+
+		<h2> You Have NO pending orders.</h3>
+		<h3> You can see your order histroy by clicking here <a href='my_account.php?my_orders'> LINK </a>
+		<br> Or you can <a href='pay_offline.php'> Pay offline </a> </h3>
+		</div>
+		";
+	}
+
+
+}
+}
+}
+}
+
+		
+
+}//function
 // creating a script for cart
 function cart()
 {
@@ -111,7 +169,6 @@ function getTotalPrice()
 	}
 	echo $total;
 }
-//This is what user sees when they go to their account// default look
 
 //get products to display
 function getPro()
