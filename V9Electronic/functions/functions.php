@@ -111,6 +111,7 @@ function getTotalPrice()
 	}
 	echo $total;
 }
+//This is what user sees when they go to their account// default look
 
 //get products to display
 function getPro()

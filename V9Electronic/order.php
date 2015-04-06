@@ -28,6 +28,7 @@ $ip_add = getRealIpAddress();
 	$invoice_no = mt_rand();//generate random number
 
 	$count_pro=mysqli_num_rows($run_price); //total products
+
 	
 	while($record=mysqli_fetch_array($run_price))
 	{
@@ -43,11 +44,12 @@ $ip_add = getRealIpAddress();
 			$total += $value;
 		}
 	
-	}//end of while
+	//end of while
 	//getting quantity form the cart
-	$get_cart ="Select * from cart";
+	$get_cart ="Select * from cart WHERE ip_add = '$ip_add'";
 	$run_cart=mysqli_query($con,$get_cart);
 	$get_qty= mysqli_fetch_array($run_cart);
+
 	$qty=$get_qty['qty']; //saving qty from database to local variable
 
 	if($qty==0)
@@ -61,8 +63,7 @@ $ip_add = getRealIpAddress();
 		$qty=$qty;
 		$sub_total=$total*$qty;
 	}
-	$insert_order="insert into customer_orders(customer_id,due_amount,invoice_no,total_products,order_date,order_status) values('$customer_id','$sub_total','$invoice_no','$count_pro','NOW()','$status')";
-	$run_order = mysqli_query($con,$insert_order);
+	
 
 	//if($run_order)
 	//{
@@ -74,5 +75,8 @@ $ip_add = getRealIpAddress();
 
 		$insert_to_pending_order="insert into pending_orders(customer_id,invoice_no,product_id,qty,order_status) values('$customer_id','$invoice_no','$product_id','$qty','$status')";
 		$run_pending_order=mysqli_query($con,$insert_to_pending_order);
-	//}
+}	
+//}
+$insert_order="insert into customer_orders(customer_id,due_amount,invoice_no,total_products,order_date,order_status) values('$customer_id','$sub_total','$invoice_no','$count_pro',NOW(),'$status')";
+	$run_order = mysqli_query($con,$insert_order);
 ?>

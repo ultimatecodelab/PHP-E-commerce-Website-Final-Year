@@ -70,7 +70,7 @@ include("functions/functions.php");
 							
 							<ul class="nav navbar-nav">
 								
-								<li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="../cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 
 
 								<?php
@@ -132,10 +132,10 @@ include("functions/functions.php");
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.php" class="active">Home</a></li>
-								<li><a href="all_products.php">All Products</a></li>
+								<li><a href="../index.php" class="active">Home</a></li>
+								<li><a href="../all_products.php">All Products</a></li>
 								<li><a href="customer/my_account.php">My Account</a></li>
-								<li><a href="cart.php">Shopping Cart</a></li>
+								<li><a href="../cart.php">Shopping Cart</a></li>
 								<li><a href="Contact.php">Contact Us</a></li>
 								<li><a href="admin_area/index.php">Admin Login</a></li>
 							</ul>
@@ -279,12 +279,23 @@ include("functions/functions.php");
 				?>
 					<div class="features_items"  id="products_box"><!--features_items start-->
 						<h2 class="title text-center">Your Account Information</h2>
+							<h2 style="background:#000; color:FC9; padding:20px; border-top:5px solid #666633;" text-align:center;> Manage your Account Here </h2>
 							
 							<?php 
-								 // getPro(); 
-								  //getCatPro();
-								  //getBrandPro();					 
-								  
+								getDefault();
+							?>
+
+							<?php
+							if(isset($_GET['my_orders']))
+							{
+								include("my_orders.php");
+							}
+
+							if(isset($_GET['edit_account']))
+							{
+								include("edit_account.php");
+							}
+
 							?>
 							
 						
